@@ -9,8 +9,15 @@ const password = document.getElementById("password");
 const passwordError = document.querySelector(".password-error");
 const validation = document.getElementById("validation");
 const validationError = document.querySelector(".validation-error");
+const passwordContainer = document.querySelector(".password-container");
+const validationContainer = document.querySelector(".validation-container");
+const passwordEyeIcon = document.querySelector(".password-eye-icon");
+const validationEyeIcon = document.querySelector(".validation-eye-icon");
+const meterElement = document.querySelector(".password-meter");
+const meterBarElement = document.querySelector(".password-meter-bar");
 
 email.addEventListener("focusout", (e) => {
+  console.log(e.target === eyeIcon);
   if (email.validity.valid) {
     emailError.textContent = "";
   } else {
@@ -76,6 +83,26 @@ function showZipCodeError() {
   zipCodeError.style.display = "block";
 }
 
+passwordEyeIcon.addEventListener("mousedown", (e) => {
+  e.preventDefault();
+});
+
+passwordEyeIcon.addEventListener("focus", (e) => {
+  e.preventDefault();
+});
+
+passwordEyeIcon.addEventListener("click", togglePasswordTextSecurity);
+
+function togglePasswordTextSecurity() {
+  if (password.type === "password") {
+    password.type = "text";
+    passwordEyeIcon.innerHTML = '<i class="fa fa-eye-slash"></i>';
+  } else {
+    password.type = "password";
+    passwordEyeIcon.innerHTML = '<i class="fa fa-eye"></i>';
+  }
+}
+
 password.addEventListener("focusout", (e) => {
   if (password.validity.valid) {
     passwordError.textContent = "";
@@ -103,12 +130,69 @@ function showPasswordError() {
   passwordError.style.display = "block";
 }
 
-validation.addEventListener("input", (e) => {
-  hideCharacters();
+password.addEventListener("input", checkPassword);
+
+function checkPassword() {
+  const passwordValue = password.value;
+
+  let score = 0;
+
+  if (passwordValue.length >= 8) {
+    score += 1;
+  }
+  if (passwordValue.length <= 16) {
+    score += 1;
+  }
+  if (passwordValue.match(/[A-Z]/)) {
+    score += 1;
+  }
+  if (passwordValue.match(/[0-9]/)) {
+    score += 1;
+  }
+  if (passwordValue.match(/[^a-zA-Z0-9]/)) {
+    score += 1;
+  }
+  if (passwordValue.match(/[^!@#$%^&*(),.?":{}|<>]/)) {
+    score += 1;
+  }
+
+  const width = (score / 6) * 100;
+
+  meterBarElement.style.width = width + "%";
+
+  if (score === 0) {
+    meterBarElement.style.background = "#f44336";
+  } else if (score < 3) {
+    meterBarElement.style.background = "#ff9800";
+  } else if (score < 6) {
+    meterBarElement.style.background = "#fdd835";
+  } else {
+    meterBarElement.style.background = "#4caf50";
+  }
+}
+
+validationEyeIcon.addEventListener("mousedown", (e) => {
+  e.preventDefault();
 });
 
+validationEyeIcon.addEventListener("focus", (e) => {
+  e.preventDefault();
+});
+
+validationEyeIcon.addEventListener("click", toggleValidationTextSecurity);
+
+function toggleValidationTextSecurity() {
+  if (validation.type === "password") {
+    validation.type = "text";
+    validationEyeIcon.innerHTML = '<i class="fa fa-eye-slash"></i>';
+  } else {
+    validation.type = "password";
+    validationEyeIcon.innerHTML = '<i class="fa fa-eye"></i>';
+  }
+}
+
 validation.addEventListener("focusout", (e) => {
-  if (validation !== password) {
+  if (validation.value !== password.value) {
     showValidationError();
   } else if (validation.validity.valueMissing) {
     validationError.textContent = "Please confirm your password";
@@ -124,16 +208,12 @@ validation.addEventListener("focus", (e) => {
 });
 
 function showValidationError() {
-  if (validation !== password) {
+  if (validation.value !== password.value) {
     validationError.textContent = "Passwords do not match";
   } else if (validation.validity.valueMissing) {
     validationError.textContent = "Please confirm your password";
   }
   validationError.style.display = "block";
-}
-
-function hideCharacters() {
-  validation.classList.add("hidden");
 }
 
 form.addEventListener("submit", (e) => {
@@ -157,7 +237,7 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();
   }
 
-  if (validation !== password) {
+  if (validation.value !== password.value) {
     showValidationError();
     e.preventDefault();
   }

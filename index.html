@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Form Validation Project</title>
     <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/3d277c5392.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <form novalidate>
@@ -321,13 +325,22 @@
             maxlength="16"
             required
           />
+          <div class="eye-icon password-eye-icon">
+            <i class="fa fa-eye"></i>
+          </div>
+          <div class="password-meter">
+            <div class="password-meter-bar"></div>
+          </div>
           <span class="error password-error"></span>
         </div>
       </div>
       <div class="validation-container form-item">
         <label for="validation">Confirm Password:</label>
         <div class="input-container">
-          <input type="text" name="validation" id="validation" required />
+          <input type="password" name="validation" id="validation" required />
+          <div class="eye-icon validation-eye-icon">
+            <i class="fa fa-eye"></i>
+          </div>
           <span class="error validation-error"></span>
         </div>
       </div>

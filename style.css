@@ -68,3 +68,61 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: #45a049;
 }
+
+.password-meter {
+  width: 100%;
+  height: 20px;
+  background: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.password-meter-bar {
+  width: 0%;
+  height: 100%;
+  background: #4caf50;
+  transition: width 0.2s;
+}
+
+.password-container .input-container {
+  position: relative;
+  padding-right: 30px;
+}
+.password-container .password-eye-icon {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 30px;
+  width: 30px;
+  height: 28px;
+  border-radius: 0;
+}
+.password-container .password-eye-icon i {
+  color: #444;
+  font-size: 16px;
+}
+
+.validation-container .input-container {
+  position: relative;
+  padding-right: 30px;
+}
+.validation-container .validation-eye-icon {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 30px;
+  width: 30px;
+  height: 28px;
+  border-radius: 0;
+}
+.validation-container .validation-eye-icon i {
+  color: #444;
+  font-size: 16px;
+}
