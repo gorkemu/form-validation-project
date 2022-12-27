@@ -267,3 +267,8 @@ const closeButton = document.querySelector(".close-button");
 closeButton.addEventListener("click", () => {
   document.getElementById("myModal").style.display = "none";
 });
+
+const tryAgainButton = document.querySelector(".try-again-button");
+tryAgainButton.addEventListener("click", () => {
+  window.location.reload();
+});
