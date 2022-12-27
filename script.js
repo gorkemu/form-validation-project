@@ -15,6 +15,8 @@ const passwordEyeIcon = document.querySelector(".password-eye-icon");
 const validationEyeIcon = document.querySelector(".validation-eye-icon");
 const meterElement = document.querySelector(".password-meter");
 const meterBarElement = document.querySelector(".password-meter-bar");
+const modal = document.getElementById("myModal");
+const span = document.getElementsByClassName("close")[0];
 
 email.addEventListener("focusout", (e) => {
   console.log(e.target === eyeIcon);
@@ -239,6 +241,24 @@ form.addEventListener("submit", (e) => {
 
   if (validation.value !== password.value) {
     showValidationError();
+    e.preventDefault();
+  }
+
+  if (
+    email.validity.valid &&
+    country.validity.valid &&
+    zipCode.validity.valid &&
+    password.validity.valid &&
+    validation.value === password.value
+  ) {
+    modal.style.display = "block";
+
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+
     e.preventDefault();
   }
 });
