@@ -262,3 +262,8 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();
   }
 });
+
+const closeButton = document.querySelector(".close-button");
+closeButton.addEventListener("click", () => {
+  document.getElementById("myModal").style.display = "none";
+});
