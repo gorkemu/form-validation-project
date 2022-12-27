@@ -19,7 +19,6 @@ const modal = document.getElementById("myModal");
 const span = document.getElementsByClassName("close")[0];
 
 email.addEventListener("focusout", (e) => {
-  console.log(e.target === eyeIcon);
   if (email.validity.valid) {
     emailError.textContent = "";
   } else {
