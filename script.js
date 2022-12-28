@@ -16,7 +16,8 @@ const validationEyeIcon = document.querySelector(".validation-eye-icon");
 const meterElement = document.querySelector(".password-meter");
 const meterBarElement = document.querySelector(".password-meter-bar");
 const modal = document.getElementById("myModal");
-const span = document.getElementsByClassName("close")[0];
+const closeButton = document.querySelector(".close-button");
+const tryAgainButton = document.querySelector(".try-again-button");
 
 email.addEventListener("focusout", (e) => {
   if (email.validity.valid) {
@@ -262,12 +263,10 @@ form.addEventListener("submit", (e) => {
   }
 });
 
-const closeButton = document.querySelector(".close-button");
 closeButton.addEventListener("click", () => {
   document.getElementById("myModal").style.display = "none";
 });
 
-const tryAgainButton = document.querySelector(".try-again-button");
 tryAgainButton.addEventListener("click", () => {
   window.location.reload();
 });
